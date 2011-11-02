@@ -1,0 +1,55 @@
+
+<div class="row">
+	<div class="span12">
+		<div id="subscribe">
+			<form id="signup_form">
+				<div class="clearfix">
+					<label for="email">Email</label>
+					<div class="input">
+						<input type="text" class="xlarge" size="64" name="email" id="email" placeholder="Enter Your Email">
+						<input type="hidden" value="<%= params[:social_id] %>">
+					</div>
+				</div>
+				<div class="actions">
+					<input id="submit_email" type="submit" class="btn primary" value="Notify Me">
+				</div>
+			</form>
+		</div>
+		
+	</div>
+</div>
+
+<script id="subscription_message" type="text/x-jquery-tmpl">
+	<div class="alert-message block-message success">
+		<p>Thank you for signing up.</p>
+		<p>Please share this link <a href="${social_url}">${social_url}</a></p>
+	</div>
+</script>
+<script> 
+
+	$(document).ready(function(){
+		
+		$('#submit_email').click(function(e){
+			$.ajax({
+				url: 'http://api.kickofflabs.com/v1/1905/subscribe', 
+				data: $('#signup_form').serialize(), 
+				dataType: 'jsonp', 
+				jsonp: 'jsonp', 
+				jsonpCallback: 'subscribe_callback', 
+				timeout: 2000, 
+				error: function() {
+					message = 'Could not subscribe the email address ' + $('#email').val();
+					alert(message);
+				}
+				});
+			e.preventDefault();
+		});
+
+	});
+
+	function subscribe_callback(data)
+	{
+		$('#subscribe').html($('#subscription_message').tmpl(data));
+	}
+
+</script>
