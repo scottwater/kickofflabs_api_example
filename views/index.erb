@@ -1,21 +1,35 @@
 
 <div class="row">
 	<div class="span12">
-		<div id="subscribe">
+	  <h2>Demo Signup Form</h2>
+		<div id="subscribe" style="margin-top:20px">
 			<form id="signup_form">
 				<div class="clearfix">
 					<label for="email">Email</label>
 					<div class="input">
 						<input type="text" class="xlarge" size="64" name="email" id="email" placeholder="Enter Your Email">
+						<input id="submit_email" type="submit" class="btn primary" value="Notify Me">
 						<input type="hidden" value="<%= params[:s] %>">
 					</div>
-				</div>
-				<div class="actions">
-					<input id="submit_email" type="submit" class="btn primary" value="Notify Me">
 				</div>
 			</form>
 		</div>
 		
+		
+	</div>
+</div>
+
+<div class="row">
+	<div class="span12">
+	  <h2 id="js">JavaScript (via jQuery) Example</h2>
+		<p><script src="https://gist.github.com/1323116.js?file=kickofflabs_api.js"></script></p>
+	</div>
+</div>
+
+<div class="row">
+	<div class="span12">
+	  <h2>Need more help?</h2>
+		<p><a href="http://www.kickofflabs.com/support" class="btn primary large">Contact KickoffLabs Support &raquo;</a></p>
 	</div>
 </div>
 
