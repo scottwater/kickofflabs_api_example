@@ -33,10 +33,10 @@
 	</div>
 </div>
 
-<script id="subscription_message" type="text/x-jquery-tmpl">
+<script id="subscription_message" type="text/hogan">
 	<div class="alert-message block-message success">
 		<p>Thank you for signing up.</p>
-		<p>Please share this link <a href="${social_url}">${social_url}</a></p>
+    <p>Please share this link <a href="{{social_url}}">{{social_url}}</a></p>
 	</div>
 </script>
 <script> 
@@ -63,7 +63,8 @@
 
 	function subscribe_callback(data)
 	{
-		$('#subscribe').html($('#subscription_message').tmpl(data));
+    var template = Hogan.compile($('#subscription_message').html());
+		$('#subscribe').html(template.render(data));
 	}
 
 </script>
