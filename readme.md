@@ -11,7 +11,6 @@ If you would like to use the API on your own server, [check out our other code e
 1. Clone the repository 
 2. Install bundler (gem install bundler)
 3. bundle install 
-4. Install shotgun 
 5. shotgun config.ru
 
 ## To deploy to Heroku 
