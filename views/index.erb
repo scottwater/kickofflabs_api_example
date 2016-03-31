@@ -3,15 +3,24 @@
 	<div class="span12">
 	  <h2>Demo Signup Form</h2>
 		<div id="subscribe" style="margin-top:20px">
-			<form id="signup_form">
-				<div class="clearfix">
-					<label for="email">Email</label>
-					<div class="input">
-						<input type="text" class="xlarge" size="64" name="email" id="email" placeholder="Enter Your Email">
-						<input id="submit_email" type="submit" class="btn primary" value="Notify Me">
-						<input id="social_id" name="social_id" type="hidden" value="<%= params[:s] %>">
-					</div>
-				</div>
+			<form id="signup_form" class="form-horizontal">
+			  <div class="control-group">
+			    <label class="control-label" for="email">Email</label>
+			    <div class="controls">
+			      <input class="input-xlarge" type="text" id="email" name="email" placeholder="Email">
+			    </div>
+			  </div>
+			  <div class="control-group">
+			    <label class="control-label" for="comment">Comment</label>
+			    <div class="controls">
+			      <textarea class="input-xlarge" rows="5" id="comment" name="comment" placeholder="What's on your mind?"></textarea>
+			    </div>
+			  </div>
+			  <div class="control-group">
+			    <div class="controls">
+			      <button type="submit" id="submit_signup" name="submit_signup" class="btn btn-success">Sign Up</button>
+			    </div>
+			  </div>
 			</form>
 		</div>
 		
@@ -33,24 +42,24 @@
 	</div>
 </div>
 
-<script id="subscription_message" type="text/x-jquery-tmpl">
-	<div class="alert-message block-message success">
+<script id="subscription_message" type="text/hogan">
+	<div class="alert alert-success">
 		<p>Thank you for signing up.</p>
-		<p>Please share this link <a href="${social_url}">${social_url}</a></p>
+    <p>Please share this link <a href="{{social_url}}">{{social_url}}</a></p>
 	</div>
 </script>
 <script> 
 
 	$(document).ready(function(){
 		
-		$('#submit_email').click(function(e){
+		$('#submit_signup').click(function(e){
 			$.ajax({
 				url: 'https://api.kickofflabs.com/v1/1905/subscribe', 
 				data: $('#signup_form').serialize(), 
 				dataType: 'jsonp', 
 				jsonp: 'jsonp', 
 				jsonpCallback: 'subscribe_callback', 
-				timeout: 2000, 
+				timeout: 5000, 
 				error: function() {
 					message = 'Could not subscribe the email address ' + $('#email').val();
 					alert(message);
@@ -63,7 +72,8 @@
 
 	function subscribe_callback(data)
 	{
-		$('#subscribe').html($('#subscription_message').tmpl(data));
+    var template = Hogan.compile($('#subscription_message').html());
+		$('#subscribe').html(template.render(data));
 	}
 
 </script>
