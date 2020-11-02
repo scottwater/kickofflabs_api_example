@@ -65,8 +65,13 @@
 
 	function subscribe_callback(data)
 	{
-    var template = Hogan.compile($('#subscription_message').html());
-		$('#subscribe').html(template.render(data));
+    var template = `
+			<div class="alert alert-success">
+				<p>Thank you for signing up!</p>
+    		<p>Please share this link <a href="${data.social_url}">${data.social_url}</a></p>
+			</div>
+	`
+		$('#subscribe').html(template);
 	}
 
 </script>
